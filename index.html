@@ -19,6 +19,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWBXJEP39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MDWBXJEP39');
+</script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Lato',sans-serif;color:#3D2508;background:#FAF8F3;-webkit-font-smoothing:antialiased}
@@ -300,7 +307,7 @@
             <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">¿Prefieres coordinar tu pedido?</h3>
             <p style="font-size:15px;color:#5a4a32;margin-top:8px;line-height:1.6">Escríbenos por WhatsApp y te ayudamos a armar tu pedido al instante.</p>
           </div>
-          <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20hacer%20un%20pedido" target="_blank" style="background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:15px 28px;border-radius:2px;cursor:pointer;text-decoration:none">Escríbenos por WhatsApp</a>
+          <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20hacer%20un%20pedido" target="_blank" onClick="{{ trackWaTienda }}" style="background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:15px 28px;border-radius:2px;cursor:pointer;text-decoration:none">Escríbenos por WhatsApp</a>
         </div>
       </section>
     </div>
@@ -355,7 +362,7 @@
                   <span style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6a52">Total</span>
                   <span style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#3D2508">{{ cartTotalLabel }}</span>
                 </div>
-                <a href="{{ waCheckoutLink }}" target="_blank" style="display:block;text-align:center;width:100%;margin-top:18px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Confirmar pedido por WhatsApp</a>
+                <a href="{{ waCheckoutLink }}" target="_blank" onClick="{{ trackWaCheckout }}" style="display:block;text-align:center;width:100%;margin-top:18px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Confirmar pedido por WhatsApp</a>
                 <p style="font-size:12px;color:#8f897c;text-align:center;margin-top:10px;line-height:1.5">Coordina entrega y pago de forma rápida y segura.</p>
               </div>
               </sc-if>
@@ -611,7 +618,7 @@
         <p style="font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;font-weight:700">Restaurantes y negocios</p>
         <h1 style="font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,58px);font-weight:700;color:#FAF8F3;margin-top:12px;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.1">Trabajamos directo contigo, sin intermediarios</h1>
         <p style="font-size:16.5px;color:#c9c3b5;margin-top:16px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.65">Si tienes un restaurante, tienda o negocio en Lima u otras ciudades del Perú, podemos coordinar pedidos al por mayor directo desde el fundo, con precios especiales por volumen.</p>
-        <a href="{{ waRestaurantLink }}" target="_blank" style="display:inline-block;margin-top:32px;background:#25D366;color:#fff;font-size:14px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;padding:17px 34px;border-radius:2px;cursor:pointer;text-decoration:none">Quiero comprar al por mayor</a>
+        <a href="{{ waRestaurantLink }}" target="_blank" onClick="{{ trackWaRestHero }}" style="display:inline-block;margin-top:32px;background:#25D366;color:#fff;font-size:14px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;padding:17px 34px;border-radius:2px;cursor:pointer;text-decoration:none">Quiero comprar al por mayor</a>
       </section>
 
       <section style="max-width:1100px;margin:0 auto;padding:90px 26px 20px;text-align:center">
@@ -649,7 +656,7 @@
         <div style="max-width:820px;margin:0 auto;padding:80px 26px;text-align:center">
           <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.6vw,40px);font-weight:700;line-height:1.2">¿Listo para conversar sobre tu pedido?</h2>
           <p style="font-size:16px;line-height:1.7;margin-top:16px;opacity:.95">Cuéntanos qué necesita tu restaurante o negocio y te ayudamos a armar el pedido, con precios y condiciones a tu medida.</p>
-          <a href="{{ waRestaurantLink }}" target="_blank" style="display:inline-block;margin-top:26px;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:17px 34px;border-radius:2px;cursor:pointer;text-decoration:none">Escríbenos por WhatsApp</a>
+          <a href="{{ waRestaurantLink }}" target="_blank" onClick="{{ trackWaRestCierre }}" style="display:inline-block;margin-top:26px;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:17px 34px;border-radius:2px;cursor:pointer;text-decoration:none">Escríbenos por WhatsApp</a>
         </div>
       </section>
     </div>
@@ -672,13 +679,13 @@
               <input placeholder="Correo electrónico" style="padding:15px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
               <input placeholder="Teléfono / WhatsApp" style="padding:15px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
               <textarea placeholder="Tu mensaje" rows="5" style="padding:15px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508;resize:vertical"></textarea>
-              <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" style="text-align:center;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s" style-hover="background:#3D2508;color:#F2EDE3">Enviar mensaje</a>
+              <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" onClick="{{ trackWaContactoForm }}" style="text-align:center;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s" style-hover="background:#3D2508;color:#F2EDE3">Enviar mensaje</a>
             </div>
           </div>
           <div>
             <h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:600;margin-bottom:22px">Datos directos</h2>
             <div style="display:flex;flex-direction:column;gap:14px">
-              <a href="https://wa.me/51902671250" target="_blank" style="display:flex;align-items:center;gap:16px;background:#F2EDE3;border:1px solid rgba(201,168,76,0.45);border-radius:4px;padding:18px 20px;text-decoration:none;transition:all .2s" style-hover="border-color:#C9A84C;transform:translateX(4px)">
+              <a href="https://wa.me/51902671250" target="_blank" onClick="{{ trackWaContactoCard }}" style="display:flex;align-items:center;gap:16px;background:#F2EDE3;border:1px solid rgba(201,168,76,0.45);border-radius:4px;padding:18px 20px;text-decoration:none;transition:all .2s" style-hover="border-color:#C9A84C;transform:translateX(4px)">
                 <svg viewBox="0 0 24 24" width="30" height="30" style="flex-shrink:0"><path fill="#25D366" d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><div><div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#8A8A56;font-weight:700">WhatsApp</div><div style="font-size:17px;font-weight:700;color:#3D2508">902 671 250</div></div>
               </a>
               <a href="https://instagram.com/oliviaoficial1978" target="_blank" style="display:flex;align-items:center;gap:16px;background:#F2EDE3;border:1px solid rgba(201,168,76,0.45);border-radius:4px;padding:18px 20px;text-decoration:none;transition:all .2s" style-hover="border-color:#C9A84C;transform:translateX(4px)">
@@ -728,7 +735,7 @@
       <div>
         <h4 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:#C9A84C;margin-bottom:18px">Contacto</h4>
         <div style="display:flex;flex-direction:column;gap:13px;font-size:14.5px;color:#c9c3b5">
-          <a href="https://wa.me/51902671250" target="_blank" style="color:#c9c3b5;text-decoration:none;display:flex;align-items:center;gap:10px" style-hover="color:#F2EDE3"><svg viewBox="0 0 24 24" width="20" height="20" style="flex-shrink:0"><path fill="#25D366" d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> WhatsApp · 902 671 250</a>
+          <a href="https://wa.me/51902671250" target="_blank" onClick="{{ trackWaFooter }}" style="color:#c9c3b5;text-decoration:none;display:flex;align-items:center;gap:10px" style-hover="color:#F2EDE3"><svg viewBox="0 0 24 24" width="20" height="20" style="flex-shrink:0"><path fill="#25D366" d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> WhatsApp · 902 671 250</a>
           <a href="https://instagram.com/oliviaoficial1978" target="_blank" style="color:#c9c3b5;text-decoration:none;display:flex;align-items:center;gap:10px" style-hover="color:#F2EDE3"><svg viewBox="0 0 24 24" width="20" height="20" style="flex-shrink:0"><defs><linearGradient id="igf" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FEDA75"/><stop offset="25%" stop-color="#FA7E1E"/><stop offset="50%" stop-color="#D62976"/><stop offset="75%" stop-color="#962FBF"/><stop offset="100%" stop-color="#4F5BD5"/></linearGradient></defs><path fill="url(#igf)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.62c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17a3.64 3.64 0 00-.88-1.35 3.64 3.64 0 00-1.35-.88c-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07zm0 2.76a5.46 5.46 0 110 10.92 5.46 5.46 0 010-10.92zm0 1.62a3.84 3.84 0 100 7.68 3.84 3.84 0 000-7.68zm5.65-2.04a1.28 1.28 0 11-2.56 0 1.28 1.28 0 012.56 0z"/></svg> @oliviaoficial1978</a>
           <a href="https://facebook.com/oliviaoficial1978" target="_blank" style="color:#c9c3b5;text-decoration:none;display:flex;align-items:center;gap:10px" style-hover="color:#F2EDE3"><svg viewBox="0 0 24 24" width="20" height="20" style="flex-shrink:0"><path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg> oliviaoficial1978</a>
           <span style="display:flex;align-items:center;gap:9px"><span>📍</span> La Yarada, Tacna, Perú</span>
@@ -783,7 +790,7 @@
           <span style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#3D2508">{{ cartTotalLabel }}</span>
         </div>
         <button onClick="{{ goCheckout }}" style="width:100%;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;transition:all .25s" style-hover="background:#3D2508;color:#F2EDE3">Proceder al pago</button>
-        <a href="{{ waCartLink }}" target="_blank" style="display:block;text-align:center;width:100%;margin-top:12px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:14px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Pedir por WhatsApp</a>
+        <a href="{{ waCartLink }}" target="_blank" onClick="{{ trackWaCartDrawer }}" style="display:block;text-align:center;width:100%;margin-top:12px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:14px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Pedir por WhatsApp</a>
       </div>
       </sc-if>
     </aside>
@@ -791,7 +798,7 @@
   </sc-if>
 
   <!-- ============ WHATSAPP FLOAT ============ -->
-  <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20hacer%20un%20pedido" target="_blank" style="position:fixed;bottom:24px;right:24px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;text-decoration:none;animation:pulseRing 2.4s infinite">
+  <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20hacer%20un%20pedido" target="_blank" onClick="{{ trackWaFloat }}" style="position:fixed;bottom:24px;right:24px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;text-decoration:none;animation:pulseRing 2.4s infinite">
     <svg viewBox="0 0 24 24" width="34" height="34"><path fill="#fff" d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
   </a>
 
@@ -833,9 +840,17 @@ class Component extends DCLogic {
   }
   fmt(n){ return 'S/ ' + Number(n).toFixed(2); }
   persist(cart){ try{ localStorage.setItem('olivia_cart', JSON.stringify(cart)); }catch(e){} }
-  go(view){ this.setState({view, menuOpen:false, cartOpen:false}); if(typeof window!=='undefined') window.scrollTo({top:0,behavior:'instant'}); }
+  go(view){
+    this.setState({view, menuOpen:false, cartOpen:false});
+    if(typeof window!=='undefined') window.scrollTo({top:0,behavior:'instant'});
+    try{ if(typeof window.gtag==='function'){ window.gtag('event','page_view',{page_title:view, page_path:'/'+(view==='home'?'':view)}); } }catch(e){}
+  }
+  trackWa(label){
+    try{ if(typeof window.gtag==='function'){ window.gtag('event','whatsapp_click',{event_category:'whatsapp', event_label:label}); } }catch(e){}
+  }
   add(id){
     this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)+1; this.persist(c); return {cart:c, cartOpen:true}; });
+    try{ if(typeof window.gtag==='function'){ window.gtag('event','add_to_cart',{event_category:'cart', event_label:id}); } }catch(e){}
   }
   setQty(id,d){
     this.setState(s=>{ const c={...s.cart}; const q=(c[id]||0)+d; if(q<=0) delete c[id]; else c[id]=q; this.persist(c); return {cart:c}; });
@@ -876,6 +891,15 @@ class Component extends DCLogic {
       hasCart:cartCount>0, cartEmpty:cartCount===0, cartCount, cartLines, cartTotalLabel:this.fmt(cartTotal),
       waCartLink:'https://wa.me/51902671250?text='+waCartText,
       waRestaurantLink:'https://wa.me/51902671250?text='+encodeURIComponent('Hola Olivia, tengo un restaurante o negocio y quisiera información sobre pedidos al por mayor'),
+      trackWaTienda:()=>this.trackWa('tienda_ayuda'),
+      trackWaCheckout:()=>this.trackWa('checkout_confirmar'),
+      trackWaRestHero:()=>this.trackWa('restaurantes_hero'),
+      trackWaRestCierre:()=>this.trackWa('restaurantes_cierre'),
+      trackWaContactoForm:()=>this.trackWa('contacto_formulario'),
+      trackWaContactoCard:()=>this.trackWa('contacto_tarjeta'),
+      trackWaFooter:()=>this.trackWa('footer'),
+      trackWaCartDrawer:()=>this.trackWa('carrito'),
+      trackWaFloat:()=>this.trackWa('boton_flotante'),
       featured, instaImgs:this.instaImgs,
       storeProducts, filterChips, storeCount:storeProducts.length,
       checkout:s.checkout, setCo,
