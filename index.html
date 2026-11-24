@@ -102,6 +102,7 @@
   }
   @media(max-width:359px){.olv-store-grid{grid-template-columns:1fr!important}}
 
+.olv-floating-cart{position:fixed;bottom:24px;right:24px;z-index:95;display:flex;align-items:center;gap:10px;background:#3D2508;color:#FAF8F3;border:1px solid #C9A84C;border-radius:32px;padding:15px 20px;min-height:56px;box-shadow:0 6px 22px #0003;cursor:pointer;font:700 14px Lato,sans-serif}.olv-floating-cart:focus-visible{outline:3px solid #C9A84C;outline-offset:3px}.olv-floating-panel{position:fixed;bottom:96px;right:24px;width:min(420px,calc(100vw - 32px));height:min(620px,calc(100dvh - 120px));z-index:94;border:1px solid #C9A84C;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px #0004}.olv-floating-panel aside>div:first-child{padding:16px 20px!important}.olv-floating-panel aside>div:first-child button{min-width:44px;min-height:44px}@media(max-width:640px){.olv-floating-cart{right:16px;bottom:16px}.olv-floating-panel{right:16px;bottom:88px;height:min(580px,calc(100dvh - 104px))}}
 </style>
 </helmet>
 
@@ -809,12 +810,11 @@
 
   <!-- ============ CART DRAWER ============ -->
   <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;inset:0;z-index:90;animation:fadeIn .25s ease">
-    <div onClick="{{ closeCart }}" style="position:absolute;inset:0;background:rgba(15,15,15,0.55)"></div>
-    <aside style="position:absolute;top:0;right:0;height:100%;width:min(420px,100%);background:#FAF8F3;display:flex;flex-direction:column;box-shadow:-12px 0 48px rgba(0,0,0,.3);animation:slideDrawer .32s cubic-bezier(.22,1,.36,1)">
+  <div class="olv-floating-panel" id="olv-floating-panel" role="region" aria-label="Tu carrito">
+    <aside style="height:100%;background:#FAF8F3;display:flex;flex-direction:column">
       <div style="background:#0F0F0F;color:#F2EDE3;padding:22px 24px;display:flex;align-items:center;justify-content:space-between">
         <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">Tu carrito</h3>
-        <button onClick="{{ closeCart }}" style="background:none;border:none;color:#F2EDE3;font-size:24px;cursor:pointer;line-height:1">✕</button>
+        <button aria-label="Cerrar carrito" onClick="{{ closeCart }}" style="background:none;border:none;color:#F2EDE3;font-size:24px;cursor:pointer;line-height:1">✕</button>
       </div>
       <div style="flex:1;overflow-y:auto;padding:8px 0">
         <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
@@ -832,9 +832,9 @@
               <p style="font-size:12px;color:#8A8A56;margin-top:2px">{{ line.presentation }}</p>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
                 <div style="display:flex;align-items:center;border:1px solid #C9A84C;border-radius:2px">
-                  <button onClick="{{ line.dec }}" style="background:none;border:none;width:28px;height:28px;cursor:pointer;font-size:16px;color:#3D2508">−</button>
+                  <button aria-label="Quitar una unidad de {{ line.name }}" onClick="{{ line.dec }}" style="background:none;border:none;width:44px;height:44px;cursor:pointer;font-size:16px;color:#3D2508">−</button>
                   <span style="width:30px;text-align:center;font-size:14px;font-weight:700">{{ line.qty }}</span>
-                  <button onClick="{{ line.inc }}" style="background:none;border:none;width:28px;height:28px;cursor:pointer;font-size:16px;color:#3D2508">+</button>
+                  <button aria-label="Añadir una unidad de {{ line.name }}" onClick="{{ line.inc }}" style="background:none;border:none;width:44px;height:44px;cursor:pointer;font-size:16px;color:#3D2508">+</button>
                 </div>
                 <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700">{{ line.lineLabel }}</span>
               </div>
@@ -856,10 +856,7 @@
   </div>
   </sc-if>
 
-  <!-- ============ WHATSAPP FLOAT ============ -->
-  <a href="https://wa.me/51902671250?text=Hola%20Olivia%2C%20quisiera%20hacer%20un%20pedido" target="_blank" onClick="{{ trackWaFloat }}" style="position:fixed;bottom:24px;right:24px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;text-decoration:none;animation:pulseRing 2.4s infinite">
-    <svg viewBox="0 0 24 24" width="34" height="34"><path fill="#fff" d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-  </a>
+  <button class="olv-floating-cart" aria-label="Abrir o cerrar carrito" aria-expanded="{{ cartOpen }}" aria-controls="olv-floating-panel" onClick="{{ toggleCart }}"><span aria-hidden="true">🛒</span><span>Carrito · {{ cartCount }}</span><strong>{{ cartTotalLabel }}</strong></button>
 
 </div>
 </x-dc>
@@ -919,7 +916,7 @@ class Component extends DCLogic {
     try{ if(typeof window.gtag==='function'){ window.gtag('event','whatsapp_click',{event_category:'whatsapp', event_label:label}); } }catch(e){}
   }
   add(id){
-    this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)+1; this.persist(c); return {cart:c, cartOpen:true}; });
+    this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)+1; this.persist(c); return {cart:c}; });
     try{ if(typeof window.gtag==='function'){ window.gtag('event','add_to_cart',{event_category:'cart', event_label:id}); } }catch(e){}
   }
   setQty(id,d){
@@ -947,7 +944,7 @@ class Component extends DCLogic {
       {key:'all',label:'Todos'},{key:'ofertas',label:'Ofertas'},{key:'aceite',label:'Aceite de Oliva'},{key:'negras',label:'Aceitunas Negras'},{key:'verdes',label:'Aceitunas Verdes'},{key:'rellenas',label:'Rellenas'},{key:'frascos',label:'Frascos'}
     ];
     const filterChips=cats.map(c=>({label:c.label, set:()=>this.setState({filter:c.key}), active:filter===c.key, bg:filter===c.key?'#3D2508':'transparent', color:filter===c.key?'#F2EDE3':'#3D2508'}));
-    const waCartText=cartIds.length?('Hola Olivia, quisiera hacer un pedido:%0A'+cartIds.map(id=>{const p=this.products.find(x=>x.id===id);return '- '+p.name+' ('+p.presentation+') x'+s.cart[id];}).join('%0A')+'%0ATotal: '+this.fmt(cartTotal)):'Hola Olivia, quisiera hacer un pedido';
+    const waCartText=encodeURIComponent(cartIds.length?('Hola Olivia, quisiera hacer un pedido:\n'+cartIds.map(id=>{const p=this.products.find(x=>x.id===id);const shortNames={'pack-olivia':'Pack Olivia','gou-tapenade':'Tapenade','neg-extra-1kg':'1 kg de aceitunas negras','oferta-negra-tapenade':'1 kg de aceitunas negras + tapenade'};const name=shortNames[id]||p.name;return '- '+s.cart[id]+'- '+name;}).join('\n')+'\nTotal: '+this.fmt(cartTotal)):'Hola Olivia, quisiera hacer un pedido');
     const setCo=(k)=>(e)=>{const val=e&&e.target?e.target.value:e; this.setState(st=>({checkout:{...st.checkout,[k]:val}}));};
     return {
       navLinks,
@@ -957,7 +954,7 @@ class Component extends DCLogic {
       addTapenade:()=>this.add('gou-tapenade'), addDip:()=>this.add('gou-dip'),
       goCheckout:()=>this.go('checkout'),
       menuOpen:s.menuOpen, toggleMenu:()=>this.setState(st=>({menuOpen:!st.menuOpen})),
-      cartOpen:s.cartOpen, openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
+      cartOpen:s.cartOpen, toggleCart:()=>this.setState({cartOpen:!s.cartOpen}), openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
       hasCart:cartCount>0, cartEmpty:cartCount===0, cartCount, cartLines, cartTotalLabel:this.fmt(cartTotal),
       waCartLink:'https://wa.me/51902671250?text='+waCartText,
       waRestaurantLink:'https://wa.me/51902671250?text='+encodeURIComponent('Hola Olivia, tengo un restaurante o negocio y quisiera información sobre pedidos al por mayor'),
