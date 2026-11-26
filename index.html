@@ -103,6 +103,7 @@
   @media(max-width:359px){.olv-store-grid{grid-template-columns:1fr!important}}
 
 .olv-floating-cart{position:fixed;bottom:24px;right:24px;z-index:95;display:flex;align-items:center;gap:10px;background:#3D2508;color:#FAF8F3;border:1px solid #C9A84C;border-radius:32px;padding:15px 20px;min-height:56px;box-shadow:0 6px 22px #0003;cursor:pointer;font:700 14px Lato,sans-serif}.olv-floating-cart:focus-visible{outline:3px solid #C9A84C;outline-offset:3px}.olv-floating-panel{position:fixed;bottom:96px;right:24px;width:min(420px,calc(100vw - 32px));height:min(620px,calc(100dvh - 120px));z-index:94;border:1px solid #C9A84C;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px #0004}.olv-floating-panel aside>div:first-child{padding:16px 20px!important}.olv-floating-panel aside>div:first-child button{min-width:44px;min-height:44px}@media(max-width:640px){.olv-floating-cart{right:16px;bottom:16px}.olv-floating-panel{right:16px;bottom:88px;height:min(580px,calc(100dvh - 104px))}}
+.olv-delivery-fields{display:grid;gap:16px}.olv-delivery-fields label,.olv-search-controls label{display:grid;gap:8px;font-weight:700}.olv-delivery-fields input,.olv-search-controls input,.olv-search-controls select{min-height:46px;padding:12px;border:1px solid #a99d83;border-radius:6px;background:#fff;color:#3D2508;font:16px Lato,sans-serif;box-sizing:border-box;width:100%}.olv-search-controls{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:22px}.olv-added-notice{position:fixed;bottom:90px;left:24px;z-index:100;background:#3D2508;color:#fff;padding:14px 20px;border-radius:8px;pointer-events:none}@media(max-width:640px){.olv-search-controls{grid-template-columns:1fr}.olv-added-notice{left:16px;bottom:90px}}
 </style>
 </helmet>
 
@@ -323,6 +324,7 @@
             <button onClick="{{ chip.set }}" style="background:{{ chip.bg }};color:{{ chip.color }};border:1.5px solid #3D2508;font-size:13px;font-weight:700;letter-spacing:.5px;padding:11px 20px;border-radius:30px;cursor:pointer;transition:all .2s">{{ chip.label }}</button>
           </sc-for>
         </div>
+        <div class="olv-search-controls"><label>Buscar productos<input type="search" placeholder="Ej. rocoto, aceite, tapenade" value="{{ search }}" onChange="{{ setSearch }}"></label><label>Ordenar por<select value="{{ sort }}" onChange="{{ setSort }}"><option value="default">Orden de la tienda</option><option value="asc">Menor precio</option><option value="desc">Mayor precio</option></select></label></div>
         <form class="olv-price-filter" onSubmit="{{ applyPrice }}" aria-label="Filtrar por precio">
           <label for="olv-min-price">Desde (S/)<input id="olv-min-price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0" value="{{ priceMin }}" onChange="{{ setPriceMin }}"></label>
           <label for="olv-max-price">Hasta (S/)<input id="olv-max-price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="{{ maxPriceLabel }}" value="{{ priceMax }}" onChange="{{ setPriceMax }}"></label>
@@ -378,30 +380,17 @@
     <div data-screen-label="Checkout" style="background:#FAF8F3">
       <section style="max-width:980px;margin:0 auto;padding:56px 26px 90px">
         <button onClick="{{ goShop }}" style="background:none;border:none;color:#8A8A56;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:20px">← Seguir comprando</button>
-        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(32px,4.6vw,48px);font-weight:700;color:#3D2508">Finaliza tu pedido</h1>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(32px,4.6vw,48px);font-weight:700;color:#3D2508">Revisa y envía tu pedido</h1>
         <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:36px;margin-top:36px" class="olv-split">
           <div>
-            <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;margin-bottom:18px">Datos de entrega</h3>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-              <input value="{{ checkout.nombre }}" onChange="{{ coNombre }}" placeholder="Nombre" style="padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
-              <input value="{{ checkout.apellido }}" onChange="{{ coApellido }}" placeholder="Apellido" style="padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
-              <input value="{{ checkout.telefono }}" onChange="{{ coTelefono }}" placeholder="Teléfono / WhatsApp" style="grid-column:span 2;padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
-              <input value="{{ checkout.direccion }}" onChange="{{ coDireccion }}" placeholder="Dirección de entrega" style="grid-column:span 2;padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
-              <input value="{{ checkout.distrito }}" onChange="{{ coDistrito }}" placeholder="Distrito" style="padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
-              <input value="{{ checkout.ciudad }}" onChange="{{ coCiudad }}" placeholder="Ciudad" style="padding:14px;border:1px solid rgba(61,37,8,0.25);border-radius:3px;font-size:15px;font-family:'Lato';background:#fff;color:#3D2508">
+            <h3 style="font-size:22px;margin-bottom:12px">¿Dónde lo recibes?</h3>
+            <p style="line-height:1.6;margin-bottom:20px">Completa lo que tengas a mano. También puedes coordinar estos datos por WhatsApp.</p>
+            <div class="olv-delivery-fields">
+              <label>Tu nombre<input autocomplete="given-name" value="{{ checkout.nombre }}" onChange="{{ coNombre }}" placeholder="Ej. Ana"></label>
+              <label>Distrito / ciudad<input autocomplete="address-level2" value="{{ checkout.distrito }}" onChange="{{ coDistrito }}" placeholder="Ej. Miraflores, Lima"></label>
+              <label>Dirección de entrega (opcional)<input autocomplete="street-address" value="{{ checkout.direccion }}" onChange="{{ coDireccion }}" placeholder="Calle, número, departamento"></label>
             </div>
-
-            <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;margin:34px 0 16px">Método de pago</h3>
-            <div style="background:#fff;border:1px solid rgba(201,168,76,0.5);border-radius:4px;padding:22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
-              <div style="width:62px;height:62px;background:#3D2508;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#C9A84C;font-size:11px;font-weight:900;text-align:center;line-height:1.2;flex-shrink:0">QR<br>YAPE</div>
-              <div style="flex:1;min-width:180px">
-                <h4 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600">Yape · 902 671 250</h4>
-                <p style="font-size:13.5px;color:#7a6a52;margin-top:5px;line-height:1.5">Yapea el total a este número a nombre de Olivia. <em>El pago por Yape automático está en proceso de mejora.</em></p>
-              </div>
-            </div>
-            <div style="background:#FFF7E6;border:1px solid #C9A84C;border-radius:4px;padding:16px 18px;margin-top:14px;font-size:14px;color:#5a4a32;line-height:1.6">
-              ⚠️ Si tienes algún problema con el pago, escríbenos por WhatsApp al <strong>902 671 250</strong> y te ayudamos de inmediato.
-            </div>
+            <p style="margin-top:20px;line-height:1.6">💚 Te confirmaremos la disponibilidad, el costo de envío y el total por WhatsApp antes de pagar.</p>
           </div>
 
           <div>
@@ -419,11 +408,13 @@
               <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
               <div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
-                  <span style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6a52">Total</span>
+                  <span style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6a52">Subtotal</span>
                   <span style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#3D2508">{{ cartTotalLabel }}</span>
                 </div>
-                <a href="{{ waCheckoutLink }}" target="_blank" onClick="{{ trackWaCheckout }}" style="display:block;text-align:center;width:100%;margin-top:18px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Confirmar pedido por WhatsApp</a>
-                <p style="font-size:12px;color:#8f897c;text-align:center;margin-top:10px;line-height:1.5">Coordina entrega y pago de forma rápida y segura.</p>
+                <a href="{{ waCheckoutLink }}" target="_blank" onClick="{{ trackWaCheckout }}" style="display:block;text-align:center;width:100%;margin-top:18px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">1. Enviar productos y precios</a>
+                <p style="font-size:12px;color:#8f897c;text-align:center;margin-top:10px;line-height:1.5">Pulsa Enviar en WhatsApp. Después vuelve a esta página para enviar tu dirección.</p>
+                <a href="{{ waDeliveryLink }}" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:14px;background:#3D2508;color:#fff;font-size:13.5px;font-weight:900;padding:16px;border-radius:2px;text-decoration:none">2. Enviar dirección de entrega</a>
+                <p style="font-size:12px;color:#8f897c;text-align:center;margin-top:10px;line-height:1.5">Se abrirá un segundo mensaje con los datos que completaste. Revisa y pulsa Enviar. Si aún no tienes la dirección, puedes coordinarla en el chat.</p>
               </div>
               </sc-if>
             </div>
@@ -845,17 +836,18 @@
       <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
       <div style="border-top:1px solid rgba(201,168,76,0.4);padding:22px 24px;background:#F2EDE3">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
-          <span style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6a52">Total</span>
+          <span style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6a52">Subtotal</span>
           <span style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#3D2508">{{ cartTotalLabel }}</span>
         </div>
-        <button onClick="{{ goCheckout }}" style="width:100%;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;transition:all .25s" style-hover="background:#3D2508;color:#F2EDE3">Proceder al pago</button>
-        <a href="{{ waCartLink }}" target="_blank" onClick="{{ trackWaCartDrawer }}" style="display:block;text-align:center;width:100%;margin-top:12px;background:#25D366;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;padding:14px;border-radius:2px;cursor:pointer;text-decoration:none;box-sizing:border-box">Pedir por WhatsApp</a>
+        <button onClick="{{ goCheckout }}" style="width:100%;background:#C9A84C;color:#0F0F0F;border:none;font-size:14px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;padding:16px;border-radius:2px;cursor:pointer;transition:all .25s" style-hover="background:#3D2508;color:#F2EDE3">Continuar pedido</button>
+        <p style="font-size:13px;margin-top:12px;line-height:1.5">Envío por confirmar según tu distrito. Continuarás por WhatsApp.</p>
       </div>
       </sc-if>
     </aside>
   </div>
   </sc-if>
 
+  <sc-if value="{{ addedNotice }}"><div class="olv-added-notice" role="status" aria-live="polite">{{ addedNotice }}</div></sc-if>
   <button class="olv-floating-cart" aria-label="Abrir o cerrar carrito" aria-expanded="{{ cartOpen }}" aria-controls="olv-floating-panel" onClick="{{ toggleCart }}"><span aria-hidden="true">🛒</span><span>Carrito · {{ cartCount }}</span><strong>{{ cartTotalLabel }}</strong></button>
 
 </div>
@@ -892,7 +884,7 @@ class Component extends DCLogic {
     this.instaImgs = ['assets/olives-oil.jpg','assets/bread.jpg','assets/harvest.jpg','assets/bottle-basket.jpg'];
     let cart = {};
     try { const s = localStorage.getItem('olivia_cart'); if(s) cart = JSON.parse(s); } catch(e){}
-    this.state = { view:'home', cart, cartOpen:false, menuOpen:false, filter:'all', priceMin:'', priceMax:'', appliedMin:0, appliedMax:null, priceError:'', checkout:{nombre:'',apellido:'',telefono:'',direccion:'',distrito:'',ciudad:''} };
+    this.state = { view:'home', cart, cartOpen:false, menuOpen:false, filter:'all', search:'', sort:'default', addedNotice:'', priceMin:'', priceMax:'', appliedMin:0, appliedMax:null, priceError:'', checkout:{nombre:'',apellido:'',telefono:'',direccion:'',distrito:'',ciudad:''} };
   }
   applyPrice(e){
     if(e && e.preventDefault) e.preventDefault();
@@ -904,7 +896,7 @@ class Component extends DCLogic {
     if(max!==null&&min>max){this.setState({priceError:'El precio mínimo no puede superar al máximo.'});return;}
     this.setState({appliedMin:min,appliedMax:max,priceError:''});
   }
-  resetFilters(){this.setState({filter:'all',priceMin:'',priceMax:'',appliedMin:0,appliedMax:null,priceError:''});}
+  resetFilters(){this.setState({filter:'all',search:'',sort:'default',priceMin:'',priceMax:'',appliedMin:0,appliedMax:null,priceError:''});}
   fmt(n){ return 'S/ ' + Number(n).toFixed(2); }
   persist(cart){ try{ localStorage.setItem('olivia_cart', JSON.stringify(cart)); }catch(e){} }
   go(view){
@@ -916,7 +908,8 @@ class Component extends DCLogic {
     try{ if(typeof window.gtag==='function'){ window.gtag('event','whatsapp_click',{event_category:'whatsapp', event_label:label}); } }catch(e){}
   }
   add(id){
-    this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)+1; this.persist(c); return {cart:c}; });
+    this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)+1; this.persist(c); return {cart:c,addedNotice:'✓ Agregado al carrito'}; });
+    clearTimeout(this.noticeTimer); this.noticeTimer=setTimeout(()=>this.setState({addedNotice:''}),2500);
     try{ if(typeof window.gtag==='function'){ window.gtag('event','add_to_cart',{event_category:'cart', event_label:id}); } }catch(e){}
   }
   setQty(id,d){
@@ -939,15 +932,17 @@ class Component extends DCLogic {
     const filter=s.filter;
     const mkStore=(p0)=>{const p=mkProd(p0);const out=!p.stock;return {...p, soldOut:out, isOffer:!!p.offer&&!out, isHighlight:!!p.highlight&&!out, badgeText:p.offer?'Oferta':(p.highlight?'★ El más querido':''), badgeBg:p.offer?'#C9A84C':'#3D2508', badgeColor:p.offer?'#0F0F0F':'#F2EDE3', cardBorder:(p.offer||p.highlight)?'2px solid #C9A84C':'1px solid rgba(201,168,76,0.45)', cardOpacity:out?'0.62':'1', imgFilter:out?'grayscale(0.55)':'none', btnBg:out?'#c9c3b5':'#3D2508', btnColor:out?'#7a6a52':'#F2EDE3', cursor:out?'not-allowed':'pointer', btnLabel:out?'Agotado':'Agregar'};};
     const storeAll=this.products.map(mkStore);
-    const storeProducts=storeAll.filter(p=>(filter==='all'||p.category===filter)&&p.price>=s.appliedMin&&(s.appliedMax===null||p.price<=s.appliedMax));
+    const normalize=t=>String(t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    const storeProducts=storeAll.filter(p=>normalize(p.name+' '+p.presentation+' '+p.cat).includes(normalize(s.search))&&(filter==='all'||p.category===filter)&&p.price>=s.appliedMin&&(s.appliedMax===null||p.price<=s.appliedMax));
+    if(s.sort==='asc')storeProducts.sort((a,b)=>a.price-b.price);if(s.sort==='desc')storeProducts.sort((a,b)=>b.price-a.price);
     const cats=[
       {key:'all',label:'Todos'},{key:'ofertas',label:'Ofertas'},{key:'aceite',label:'Aceite de Oliva'},{key:'negras',label:'Aceitunas Negras'},{key:'verdes',label:'Aceitunas Verdes'},{key:'rellenas',label:'Rellenas'},{key:'frascos',label:'Frascos'}
     ];
     const filterChips=cats.map(c=>({label:c.label, set:()=>this.setState({filter:c.key}), active:filter===c.key, bg:filter===c.key?'#3D2508':'transparent', color:filter===c.key?'#F2EDE3':'#3D2508'}));
-    const waCartText=encodeURIComponent(cartIds.length?('Hola Olivia, quisiera hacer un pedido:\n'+cartIds.map(id=>{const p=this.products.find(x=>x.id===id);const shortNames={'pack-olivia':'Pack Olivia','gou-tapenade':'Tapenade','neg-extra-1kg':'1 kg de aceitunas negras','oferta-negra-tapenade':'1 kg de aceitunas negras + tapenade'};const name=shortNames[id]||p.name;return '- '+s.cart[id]+'- '+name;}).join('\n')+'\nTotal: '+this.fmt(cartTotal)):'Hola Olivia, quisiera hacer un pedido');
+    const waCartText=encodeURIComponent(cartIds.length?('Hola Olivia, quisiera hacer un pedido:\n'+cartIds.map(id=>{const p=this.products.find(x=>x.id===id);const shortNames={'pack-olivia':'Pack Olivia','gou-tapenade':'Tapenade','neg-extra-1kg':'1 kg de aceitunas negras','oferta-negra-tapenade':'1 kg de aceitunas negras + tapenade','aceite-1l':'Aceite de oliva 1 L','aceite-3l':'Aceite de oliva 3 L'};const name=shortNames[id]||p.name;return '- '+s.cart[id]+'- '+name+' — '+this.fmt(p.price)+' c/u = '+this.fmt(p.price*s.cart[id]);}).join('\n')+'\nSubtotal de productos: '+this.fmt(cartTotal)+'\nEnvío: por confirmar según distrito.'):'Hola Olivia, quisiera hacer un pedido');
     const setCo=(k)=>(e)=>{const val=e&&e.target?e.target.value:e; this.setState(st=>({checkout:{...st.checkout,[k]:val}}));};
     return {
-      navLinks,
+      navLinks, search:s.search, sort:s.sort, setSearch:e=>this.setState({search:e.target.value}), setSort:e=>this.setState({sort:e.target.value}), addedNotice:s.addedNotice,
       isHome:v==='home', isHistory:v==='history', isProducts:v==='products', isPicadillo:v==='picadillo', isTienda:v==='tienda', isRestaurantes:v==='restaurantes', isContacto:v==='contacto', isCheckout:v==='checkout',
       goHome:()=>this.go('home'), goHistory:()=>this.go('history'), goProducts:()=>this.go('products'), goPicadillo:()=>this.go('picadillo'), goShop:()=>this.go('tienda'), goRestaurantes:()=>this.go('restaurantes'), goContacto:()=>this.go('contacto'),
       goShopFromCart:()=>this.go('tienda'),
@@ -978,9 +973,12 @@ class Component extends DCLogic {
       checkout:s.checkout, setCo,
       coNombre:setCo('nombre'), coApellido:setCo('apellido'), coTelefono:setCo('telefono'), coDireccion:setCo('direccion'), coDistrito:setCo('distrito'), coCiudad:setCo('ciudad'),
       waCheckoutLink:'https://wa.me/51902671250?text='+waCartText,
+      waDeliveryLink:'https://wa.me/51902671250?text='+encodeURIComponent('Datos de entrega de mi pedido Olivia:'+[['Nombre',s.checkout.nombre],['Distrito / ciudad',s.checkout.distrito],['Dirección',s.checkout.direccion]].filter(x=>x[1].trim()).map(x=>'\n'+x[0]+': '+x[1].trim()).join('')+'\nPor favor, confirmar el costo de envío y el total antes del pago.'),
     };
   }
 }
 </script>
 </body>
 </html>
+
+
